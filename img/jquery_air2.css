@@ -1,0 +1,328 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+
+/* =Basic HTML
+----------------------------------------------------------------------*/
+
+a
+{
+	text-decoration: none;
+}
+
+body
+{
+	background: url(../images/1.jpg);
+	/*color: #666;
+	font: 10px Arial, sans-serif; */
+}
+
+p
+{
+	margin: 0 0 15px;
+}
+
+input.button
+{
+	background: #fff;
+	border-color: #ddd #999 #666 #ccc;
+	border-style: solid;
+	border-width: 2px;
+	color: #000;
+	cursor: pointer;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	overflow: visible;
+	padding: 4px 3px 3px;
+	text-transform: uppercase;
+	width: auto;
+}
+
+/* =Logo + Info
+----------------------------------------------------------------------*/
+
+#logo
+{
+	display: block;
+	float: left;
+	margin: 0 0 10px;
+}
+
+#info
+{
+	display: block;
+	float: right;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+#info strong
+{
+	font-size: 18px;
+}
+
+/* =Container
+----------------------------------------------------------------------*/
+
+#container
+{
+	border-top: 5px solid #f00;
+	margin: 0 auto;
+	padding: 20px 0 0;
+	width: 650px;
+}
+
+/* =Airplane
+----------------------------------------------------------------------*/
+
+#airplane
+{
+	background: url(../img/airplane2.gif) no-repeat;
+	clear: both;
+	font-size: 0;
+	margin: 0 0 15px;
+	overflow: hidden;
+	position: relative;
+	width: 650px;
+	height: 148px;
+	background-image: url(../img/airplane2.gif);
+}
+
+#airplane a
+{
+	background-image: url(../img/seat2.gif);
+	background-repeat: no-repeat;
+	display: block;
+	overflow: hidden;
+	text-indent: -99999px;
+	width: 27px;
+	height: 30px;
+}
+
+#airplane a:hover,
+#airplane a:focus
+{
+	background-position: -28px 0;
+}
+
+#airplane a.selected,
+#airplane a.selected:hover
+{
+	background-position: -57px 0;
+}
+
+#airplane li
+{
+	list-style: none;
+	position: absolute;
+	visibility: hidden;
+	width: 10px;
+	height: 10px;
+}
+
+#airplane li#master
+{
+	font-size: 10px;
+	overflow: visible;
+	top: 10px;
+	left: 10px;
+	width: auto;
+	height: auto;
+}
+
+#airplane input
+{
+	vertical-align: middle;
+}
+
+#airplane label
+{
+	font-weight: bold;
+}
+
+/* =Airplane - Seat Letters
+----------------------------------------------------------------------*/
+
+#airplane .A
+{
+	top: 20px;
+}
+
+#airplane .B
+{
+	top: 48px;
+}
+
+#airplane .C
+{
+	top: 98px;
+}
+
+
+
+
+
+/* =Airplane - Seat Numbers
+----------------------------------------------------------------------*/
+
+
+
+#airplane .seat_01
+{
+	left: 189px;
+}
+
+
+
+#airplane .seat_02
+{
+	left: 221px;
+}
+
+
+
+#airplane .seat_03
+{
+	left: 254px;
+}
+
+
+#airplane .seat_04
+{
+	left: 290px;
+}
+
+
+#airplane .seat_05
+{
+	left: 322px;
+}
+
+#airplane .seat_06
+{
+	left: 356px;
+}
+
+
+/* =Tabbed List
+----------------------------------------------------------------------*/
+
+#tabs
+{
+	display: none;
+	list-style: none;
+}
+
+#tabs a
+{
+	color: #00f;
+	display: block;
+	padding: 5px 0;
+	text-align: center;
+	width: 26px;
+}
+
+#tabs a:hover,
+#tabs a:focus
+{
+	background: #ddd;
+	text-decoration: underline;
+}
+
+#tabs a.selected
+{
+	background: #036;
+	color: #fff;
+	font-weight: bold;
+}
+
+#tabs li
+{
+	display: block;
+	float: left;
+	padding: 0 0 5px;
+	width: 26px;
+}
+
+/* =Passenger Details
+----------------------------------------------------------------------*/
+
+#passenger_details,
+#passenger_details th,
+#passenger_details td
+{
+	border-color: #bbb;
+	border-style: solid;
+}
+
+#passenger_details
+{
+	border-width: 0 1px 1px 0;
+	clear: both;
+	margin: 0 0 15px;
+	width: 650px;
+}
+
+#passenger_details th,
+#passenger_details td
+{
+	border-width: 1px 0 0 1px;
+	padding: 10px;
+	text-align: left;
+}
+
+#passenger_details th
+{
+	background: #fff;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+#passenger_details tr.selected td
+{
+	background: #ff9;
+	color: #000;
+}
+
+#passenger_details label
+{
+	display: block;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+}
+
+#passenger_details input,
+#passenger_details select
+{
+	font: 10px Arial, sans-serif;
+	width: 75px;
+}
+
+/* =Footer
+----------------------------------------------------------------------*/
+
+#footer
+{
+	border-top: 5px solid #ddd;
+	color: #999;
+	letter-spacing: 1px;
+	padding: 10px 0 0;
+	text-align: center;
+	text-transform: uppercase;
+	width: 650px;
+}
+
+#footer a
+{
+	color: #999;
+}
+
+#footer a:hover
+{
+	color: #333;
+}
