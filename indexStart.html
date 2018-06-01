@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rota do Sol Passagens</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		
+
+  <script src="js/jquery-1.12.4.js"></script>
+  <script src="js/jquery-ui2.js"></script>
+  <script>
+  $( function() {
+    $.widget( "custom.combobox", {
+      _create: function() {
+        this.wrapper = $( "<span>" )
+          .addClass( "custom-combobox" )
+          .insertAfter( this.element );
+ 
+        this.element.hide();
+        this._createAutocomplete();
+        this._createShowAllButton();
+      },
+ 
+      _createAutocomplete: function() {
+        var selected = this.element.children( ":selected" ),
+          value = selected.val() ? selected.text() : "";
+ 
+        this.input = $( "<input>" )
+          .appendTo( this.wrapper )
+          .val( value )
+          .attr( "title", "" )
+          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .autocomplete({
+            delay: 0,
+            minLength: 0,
+            source: $.proxy( this, "_source" )
+          })
+          .tooltip({
+            classes: {
+              "ui-tooltip": "ui-state-highlight"
+            }
+          });
+ 
+        this._on( this.input, {
+          autocompleteselect: function( event, ui ) {
+            ui.item.option.selected = true;
+            this._trigger( "select", event, {
+              item: ui.item.option
+            });
+          },
+ 
+          autocompletechange: "_removeIfInvalid"
+        });
+      },
+ 
+      _createShowAllButton: function() {
+        var input = this.input,
+          wasOpen = false;
+ 
+        $( "<a>" )
+          .attr( "tabIndex", -1 )
+          .attr( "title", "Show All Items" )
+          .tooltip()
+          .appendTo( this.wrapper )
+          .button({
+            icons: {
+              primary: "ui-icon-triangle-1-s"
+            },
+            text: false
+          })
+          .removeClass( "ui-corner-all" )
+          .addClass( "custom-combobox-toggle ui-corner-right" )
+          .on( "mousedown", function() {
+            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+          })
+          .on( "click", function() {
+            input.trigger( "focus" );
+ 
+            // Close if already visible
+            if ( wasOpen ) {
+              return;
+            }
+ 
+            // Pass empty string as value to search for, displaying all results
+            input.autocomplete( "search", "" );
+          });
+      },
+ 
+      _source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( this.element.children( "option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text,
+              value: text,
+              option: this
+            };
+        }) );
+      },
+ 
+      _removeIfInvalid: function( event, ui ) {
+ 
+        // Selected an item, nothing to do
+        if ( ui.item ) {
+          return;
+        }
+ 
+        // Search for a match (case-insensitive)
+        var value = this.input.val(),
+          valueLowerCase = value.toLowerCase(),
+          valid = false;
+        this.element.children( "option" ).each(function() {
+          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+            this.selected = valid = true;
+            return false;
+          }
+        });
+ 
+        // Found a match, nothing to do
+        if ( valid ) {
+          return;
+        }
+ 
+        // Remove invalid value
+        this.input
+          .val( "" )
+          .attr( "title", value + " didn't match any item" )
+          .tooltip( "open" );
+        this.element.val( "" );
+        this._delay(function() {
+          this.input.tooltip( "close" ).attr( "title", "" );
+        }, 2500 );
+        this.input.autocomplete( "instance" ).term = "";
+      },
+ 
+      _destroy: function() {
+        this.wrapper.remove();
+        this.element.show();
+      }
+    });
+ 
+    $( "#combobox" ).combobox();
+    $( "#toggle" ).on( "click", function() {
+      $( "#combobox" ).toggle();
+    });
+  } );
+  </script>
+  
+       
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+<link rel="icon" href="img/favicon.ico" type="image/x-icon">        
+
+<style>
+body { 
+  background: url(backgroundteste.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
+
+
+</head>
+<body>
+
+	<h1><img src="img/logo.png"></h1>
+	 
+	<div class="main-agileinfo">
+		<div class="sap_tabs">			
+			<div id="horizontalTab">
+				<ul class="resp-tabs-list">
+					<li class="resp-tab-item"><span>IDA E VOLTA</span></li>
+					<li class="resp-tab-item"><span>SÓ IDA</span></li>
+							
+				</ul>	
+				<div class="clearfix"> </div>	
+				<div class="resp-tabs-container">
+					<div class="tab-1 resp-tab-content roundtrip">
+						<form action="flightsearch2.php" id="form1" method="post">
+                        <input type="hidden" name="tipo" value="2ways"/>
+							<div class="from">
+								<h3>ORIGEM</h3>
+                                <select name="from" id="origem1" style="height:38px;" required>
+                                <option value="">Escolha sua Origem</option>
+                                </select>
+ 
+							</div>
+							<div class="to">
+								<h3>DESTINO</h3>
+                                <select name="to" id="destino1" style="height:38px;" required>
+										<option value="">Escolha seu Destino</option>
+                                                                    						
+								</select>                                
+
+							</div>
+							<div class="clear"></div>
+							<div class="date">
+								<div class="depart">
+									<h3>IDA</h3>
+
+                                    <input  id="datepicker" name="diaIda" type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required>
+									<span class="checkbox1">
+										<label class="checkbox"><input type="checkbox" name="ida_flex" checked><i> </i>Data flexível</label>
+									</span>
+								</div>
+								<div class="return">
+									<h3>VOLTA</h3>
+									<input  id="datepicker1" name="diaVolta" type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required>
+									<span class="checkbox1">
+										<label class="checkbox"><input type="checkbox" name="volta_flex" checked><i> </i>Data flexível</label>
+									</span>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="class">
+								<h3>TARIFA</h3>
+								<select id="tarifa1" name="tarifa" style="height:38px;" required>
+									<option value="B">Básica - Não Reembolsável</option>  
+									<option value="F">Flexível - Reembolsável</option>    				
+								</select>
+                                <br/>
+										<span style="color:#333; font-size:11px; font-weight:bold;">* Tarifa Flexível irá acresentar um valor de R$ 50,00 ao valor do assento não havendo mudança no valor da tarifa aérea.</span>
+									
+							</div>
+							<div class="clear"></div>
+							<div class="numofppl">
+								<div id="adulto1" class="adults">
+									<h3>Adulto:(> 12 anos)</h3>
+									<div class="quantity"> 
+										<div class="quantity-select">                           
+											<div class="entry value-minus">&nbsp;</div>
+											<div class="entry value"><span>0</span></div>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div>
+									</div>
+								</div>
+								<div id="crianca1" class="child">
+									<h3>Criança:</h3>
+									<div class="quantity"> 
+										<div class="quantity-select">                           
+											<div class="entry value-minus">&nbsp;</div>
+											<div class="entry value"><span>0</span></div>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+                            
+                            
+                            <input type="hidden" id="quantidade1" name="quantidade" value="0"/>
+                            
+                            
+                            
+							<div class="clear"></div>
+							<input type="submit" id="submit1" value="Buscar Voos" disabled>
+						</form>						
+					</div>		
+					<div class="tab-1 resp-tab-content oneway">
+						<form action="flightsearch2.php" method="post">
+                         <input type="hidden" name="tipo" value="oneway"/>
+							<div class="from">
+								<h3>ORIGEM</h3>
+                                <select id="origem2" name="from" style="height:38px;" required>
+									
+                               <option value="">Escolha sua Origem</option>
+
+                                                                                                          						
+								</select>
+								
+							</div>
+							<div class="to">
+								<h3>DESTINO</h3>
+                                <select id="destino2" name="to" style="height:38px;" required>
+								
+                                <option value="">Escolha seu Destino</option>
+                                                                          						
+								</select>
+							
+							</div>
+							<div class="clear"></div>
+							<div class="date">
+								<div class="depart">
+									<h3>SAÍDA</h3>
+									<input class="date" id="datepicker2" name="diaIda" type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}" required>
+									<span class="checkbox1">
+										<label class="checkbox"><input type="checkbox" name="ida_flex" checked><i> </i>Data flexível</label>
+									</span>
+								</div>
+							</div>
+							<div class="class">
+								<h3>TARIFA</h3>
+								<select id="tarifa2" name="tarifa" style="height:38px;">
+									<option value="B">Básica - Não Reembolsável</option>  
+									<option value="F">Flexível - Reembolsável</option>   						
+								</select>
+                                <br/>
+										<span style="color:#333; font-size:11px; font-weight:bold;">* Tarifa Flexível irá acresentar um valor de R$ 50,00 ao valor do assento não havendo mudança no valor da tarifa aérea.</span>                                
+
+							</div>
+							<div class="clear"></div>
+							<div class="numofppl">
+								<div id="adulto2" class="adults">
+									<h3>Adulto:(> 12 anos)</h3>
+									<div class="quantity"> 
+										<div class="quantity-select">                           
+											<div class="entry value-minus">&nbsp;</div>
+											<div class="entry value"><span>0</span></div>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div>
+									</div>
+								</div>
+								<div id="crianca2" class="child">
+									<h3>Criança:</h3>
+									<div class="quantity"> 
+										<div class="quantity-select">                           
+											<div class="entry value-minus">&nbsp;</div>
+											<div class="entry value"><span>0</span></div>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="clear"></div>
+                            
+                            
+                            <input type="hidden" id="quantidade2" name="quantidade" value="0"/>
+                            
+							<input type="submit" id="submit2" value="Buscar Voos" disabled>
+						</form>	
+								
+					</div>
+					<div class="tab-1 resp-tab-content multicity">
+						
+									
+
+					</div>
+		
+				</div>						
+			</div>
+		</div>
+	</div>
+	<div class="footer-w3l">
+
+          <div align="center" style="text-align:center;">
+          		<a href="/bilhete/seatmaps/politica.php" target="_blank" style="text-decoration:none">Conheça nossa política de cancelamentos</a>
+          </div>
+
+
+        <p class="agileinfo"> &copy; Todos os direitos reservados a Rota do Sol CNPJ 01.904.715/0001-31 <br/>
+        Tels: <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:(85)996059699">+55 (85) 99605.9699 / (85) 98773.0470</a> <br/> Powered by <a href="http://catalux.com.br/">CataLux WebServices</a></p>
+
+	</div>
+
+		<script src="js/jquery.min.js"> </script>
+		<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				document.getElementById("destino1").disabled = true;
+				document.getElementById("destino2").disabled = true;
+				
+				$('#horizontalTab').easyResponsiveTabs({
+					type: 'default', //Types: default, vertical, accordion           
+					width: 'auto', //auto or any width like 600px
+					fit: true   // 100% fit in a container
+				});
+
+			});		
+			
+			
+			//ida e volta
+			$('#origem1').on( "change", function() {
+   				 var op = $( this ).val();
+				 
+				if (op.length) { // if somethings' selected
+            			//alert(value);
+					document.getElementById('destino1').disabled = false;
+    				$('#destino1 option').prop('disabled', false);
+   				 	$('#destino1 option[value='+op+']').prop('disabled', true);
+				}else{
+					document.getElementById('destino1').disabled = true;
+				}
+			});
+			
+			
+			$('#tarifa1').on( "change", function() {
+   				 var op = $( this ).val();
+				 
+				if (op == 'CRIANCA') { // if somethings' selected
+            		
+					
+					document.getElementById('adulto1').hidden = true;
+
+				}else{
+					
+					document.getElementById('adulto1').hidden = false;
+				}
+			});			
+			
+			//so ida
+			
+			$('#origem2').on( "change", function() {
+   				 var op = $( this ).val();
+				 
+				if (op.length) { // if somethings' selected
+            			//alert(value);
+					document.getElementById('destino2').disabled = false;
+    				$('#destino2 option').prop('disabled', false);
+   				 	$('#destino2 option[value='+op+']').prop('disabled', true);
+				}else{
+					document.getElementById('destino2').disabled = true;
+				}
+			});
+			
+			
+			$('#tarifa2').on( "change", function() {
+   				 var op = $( this ).val();
+				 
+				if (op == 'CRIANCA') { // if somethings' selected
+            		
+					
+					document.getElementById('adulto2').hidden = true;
+
+				}else{
+					
+					document.getElementById('adulto2').hidden = false;
+				}
+			});					
+			
+			
+			
+			
+		</script>
+
+				<!-- Calendar -->
+				<link rel="stylesheet" href="css/jquery-ui.css" />
+				<script src="js/jquery-ui.js"></script>
+				  <script>
+						  $(function() {
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker({ 
+							dateFormat: "dd/mm/yy",
+							dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+    nextText: 'Próximo',
+    prevText: 'Anterior'
+							 });
+						  });
+				  </script>
+			<!-- //Calendar -->
+			<!--quantity-->
+									<script>
+									$('.value-plus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+										divUpd.text(newVal);
+										
+										//ida e volta
+										var novovalor = document.getElementById('quantidade1').value;
+										
+										var final = parseInt(novovalor) + 1;
+										
+										document.getElementById('quantidade1').value = final;
+										
+										document.getElementById('submit1').disabled = false;
+										document.getElementById('submit2').disabled = false;
+										
+										//so ida
+										var novovalor2 = document.getElementById('quantidade2').value;
+										
+										var final2 = parseInt(novovalor2) + 1;
+										
+										document.getElementById('quantidade2').value = final2;
+										
+										
+									});
+
+									$('.value-minus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+										if(newVal>=0){ divUpd.text(newVal);
+										
+											if(newVal == 0){
+												document.getElementById('submit1').disabled = true;
+												document.getElementById('submit2').disabled = true;
+												alert("Informe o número de passageiros!!!");
+											}
+										
+										//ida e volta
+										var novovalor = document.getElementById('quantidade1').value;
+										
+										var final = parseInt(novovalor) - 1;
+										
+										document.getElementById('quantidade1').value = final;
+										
+										//so ida
+										
+										var novovalor2 = document.getElementById('quantidade2').value;
+										
+										var final2 = parseInt(novovalor2) - 1;
+										
+										document.getElementById('quantidade2').value = final2;
+										
+										}
+										
+									});
+									</script>
+								<!--//quantity-->
+						<!--load more-->
+								<script>
+	$(document).ready(function () {
+		
+		size_li = $("#myList li").size();
+		x=1;
+		$('#myList li:lt('+x+')').show();
+		$('#loadMore').click(function () {
+			x= (x+1 <= size_li) ? x+1 : size_li;
+			$('#myList li:lt('+x+')').show();
+		});
+		$('#showLess').click(function () {
+			x=(x-1<0) ? 1 : x-1;
+			$('#myList li').not(':lt('+x+')').hide();
+		});
+	});
+</script>
+
+  <script>
+  
+  function Checarpass1(){ 
+  	var quantos = document.getElementById('quantidade1').value      
+    if (quantos >=1) {
+         $('#form1').submit();
+    }else{
+		alert("Favor informar a quantidade de passageiros!!!");
+	}
+}
+  
+  
+  </script>
+<!-- //load-more -->
+	<div>
+		<script language='javascript'>
+			function vopenw() {	
+				tbar='location=no,status=yes,resizable=yes,scrollbars=yes,width=560,height=535';	
+				sw =  window.open('https://www.certisign.com.br/seal/splashcerti?dn=pagamento.rotadosoltaxi.com.br','CRSN_Splash',tbar);	
+				sw.focus();
+			}
+		</script>
+		<a href='javascript:vopenw()'>
+	        	<img style="margin-right: 23px; margin-top: 14px; float: left;" src='img/100x46_fundo_branco.gif' border=0 align=center alt='Um site validado pela Certisign indica que nossa empresa concluiu satisfatoriamente todos os procedimentos para determinar que o domínio validado é de propriedade ou se encontra registrado por uma empresa ou organização autorizada a negociar por ela ou exercer qualquer atividade lícita em seu nome.'>
+		</a>
+		<script src=https://seal.verisign.com/getseal?host_name=pagamento.rotadosoltaxi.com.br&size=S&use_flash=NO&use_transparent=getsealjs_b.js&lang=pt></script>
+	</div>
+</body>
+</html>
